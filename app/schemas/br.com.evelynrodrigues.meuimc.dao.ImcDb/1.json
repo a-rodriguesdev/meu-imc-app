@@ -1,0 +1,70 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "95d654ba572541928ce0cc190be0c581",
+    "entities": [
+      {
+        "tableName": "TB_PESAGEM",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `data` TEXT NOT NULL, `altura` REAL NOT NULL, `peso` REAL NOT NULL, `imc` REAL NOT NULL, `classificacao` TEXT NOT NULL, `cor` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "data",
+            "columnName": "data",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "altura",
+            "columnName": "altura",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "peso",
+            "columnName": "peso",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imc",
+            "columnName": "imc",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "classificacao",
+            "columnName": "classificacao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cor",
+            "columnName": "cor",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '95d654ba572541928ce0cc190be0c581')"
+    ]
+  }
+}

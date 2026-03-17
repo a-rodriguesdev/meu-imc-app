@@ -9,6 +9,7 @@ import br.com.evelynrodrigues.meuimc.repository.PesagemRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class TelaInicialViewModel(
     private val repository: PesagemRepository
@@ -36,6 +37,13 @@ class TelaInicialViewModel(
 
     fun abrirListaPesagens(){
         _telaAtual.value = Screen.ListaPesagens
+    }
+
+    // Gravar uma nova pesagem
+    fun inserirPesagem(pesagem: Pesagem) {
+        viewModelScope.launch {
+            repository.inserirPesagem(pesagem)
+        }
     }
 
 }

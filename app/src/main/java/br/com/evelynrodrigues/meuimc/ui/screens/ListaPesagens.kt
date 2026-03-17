@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -27,10 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.evelynrodrigues.meuimc.model.Pesagem
 import br.com.evelynrodrigues.meuimc.ui.theme.MeuIMCTheme
 
 @Composable
-fun ListaPesagens(modifier: Modifier = Modifier) {
+fun ListaPesagens(pesagens: List<Pesagem>) {
     Column() {
         Text(
             text = "Registro de progresso",
@@ -46,17 +48,17 @@ fun ListaPesagens(modifier: Modifier = Modifier) {
                 .background(Color(0xFFF5F5F5)),
             contentPadding = PaddingValues(top = 16.dp, bottom = 64.dp),
         ) {
-            items(15) {
+            items(pesagens) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 ) {
                     Text(
-                        text = "15-10-2025"
+                        text = it.data
                     )
                     Text(
-                        text = "79.5 Kg"
+                        text = "${it.peso} kg"
                     )
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -69,7 +71,7 @@ fun ListaPesagens(modifier: Modifier = Modifier) {
                             )
                         ) {
                             Text(
-                                text = "Abaixo do peso",
+                                text = "IMC: ${String.format("%.1f", it.imc)} - ${it.classificacao}",
                                 modifier = Modifier.padding(
                                     horizontal = 8.dp,
                                     vertical = 2.dp
@@ -97,6 +99,6 @@ fun ListaPesagens(modifier: Modifier = Modifier) {
 @Composable
 private fun ListaPesagensPreview() {
     MeuIMCTheme {
-        ListaPesagens()
+        ListaPesagens(emptyList())
     }
 }

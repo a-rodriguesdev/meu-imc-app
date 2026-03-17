@@ -16,14 +16,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.evelynrodrigues.meuimc.ui.theme.MeuIMCTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaInicial(viewModel: TelaInicialViewModel) {
+
+    val pesagens by viewModel.pesagens.collectAsStateWithLifecycle()
 
     val telaAtual = viewModel.telaAtual.value
 
@@ -78,8 +82,13 @@ fun TelaInicial(viewModel: TelaInicialViewModel) {
                     is Screen.FormularioPesagem -> FormularioPesagem(
                         onCancelar = {
                             viewModel.abrirListaPesagens()
-                        })
-                    is Screen.ListaPesagens -> ListaPesagens()
+                        },
+                        onRegistrarPeso = {pesagem ->
+                            viewModel.inserirPesagem(pesagem)
+                            viewModel.abrirListaPesagens()
+                        }
+                    )
+                    is Screen.ListaPesagens -> ListaPesagens(pesagens)
                 }
             }
         }
@@ -90,6 +99,6 @@ fun TelaInicial(viewModel: TelaInicialViewModel) {
 @Composable
 fun TelaInicialPreview() {
     MeuIMCTheme() {
-        TelaInicial(viewModel = TelaInicialViewModel())
+        //TelaInicial(viewModel = TelaInicialViewModel)
     }
 }
