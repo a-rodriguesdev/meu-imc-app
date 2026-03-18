@@ -32,7 +32,10 @@ import br.com.evelynrodrigues.meuimc.model.Pesagem
 import br.com.evelynrodrigues.meuimc.ui.theme.MeuIMCTheme
 
 @Composable
-fun ListaPesagens(pesagens: List<Pesagem>) {
+fun ListaPesagens(
+    pesagens: List<Pesagem>,
+    onDelete: (Pesagem) -> Unit
+    ) {
     Column() {
         Text(
             text = "Registro de progresso",
@@ -67,11 +70,12 @@ fun ListaPesagens(pesagens: List<Pesagem>) {
                     ) {
                         Card(
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(0xFFFFC107)
+                                containerColor = Color(it.cor.toLong(16))
                             )
                         ) {
                             Text(
                                 text = "IMC: ${String.format("%.1f", it.imc)} - ${it.classificacao}",
+                                color = Color.White,
                                 modifier = Modifier.padding(
                                     horizontal = 8.dp,
                                     vertical = 2.dp
@@ -79,7 +83,9 @@ fun ListaPesagens(pesagens: List<Pesagem>) {
                             )
                         }
                         IconButton(
-                            onClick = {}
+                            onClick = {
+                                onDelete(it)
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
@@ -99,6 +105,9 @@ fun ListaPesagens(pesagens: List<Pesagem>) {
 @Composable
 private fun ListaPesagensPreview() {
     MeuIMCTheme {
-        ListaPesagens(emptyList())
+        ListaPesagens(
+            emptyList(),
+            onDelete = {}
+            )
     }
 }

@@ -46,4 +46,11 @@ class TelaInicialViewModel(
         }
     }
 
+    // Excluir uma pesagem
+    fun excluirPesagem(pesagem: Pesagem) {
+        viewModelScope.launch {
+            repository.deletarPesagem(pesagem)
+        }
+    }
+
 }
